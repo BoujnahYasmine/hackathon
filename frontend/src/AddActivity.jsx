@@ -53,7 +53,7 @@ const AddActivity = (props) => {
     formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:5000/api/activities", {
+      const response = await fetch("https://hackathon-44is.onrender.com/api/activities", {
         method: "POST",
         body: formData,
       });
