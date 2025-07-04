@@ -12,11 +12,11 @@ const NavAccueil = () => {
       {/* Logo */}
       <div className="flex items-center space-x-3">
         <img
-          src="/logo192.png" // replace with your logo path
+          src="./src/assets/1.png" 
           alt="Logo"
           className="w-10 h-10"
         />
-        <span className="font-bold text-xl text-gray-800">MyApp</span>
+        <span className="font-bold text-xl text-gray-800">ConnectNet</span>
       </div>
 
       {/* Links */}
@@ -25,7 +25,10 @@ const NavAccueil = () => {
           Accueil
         </NavLink>
         <NavLink to="/list" className={linkClass}>
-          Activite
+          Activities
+        </NavLink>
+        <NavLink to="/add-activity" className={linkClass}>
+          Add Activity
         </NavLink>
         <NavLink to="/about" className={linkClass}>
           About

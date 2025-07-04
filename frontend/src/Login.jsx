@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsAuthenticated}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,12 +19,8 @@ const Login = () => {
       });
 
       console.log("Login successful:", res.data);
-
-      // Optional: save token to localStorage
-      // localStorage.setItem("token", res.data.token);
-
+      setIsAuthenticated(true);
       navigate("/add-activity");
- // redirect to dashboard
     } catch (err) {
       if (err.response && err.response.data.message) {
         setError(err.response.data.message);
@@ -35,18 +31,32 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')", // Summer/travel theme image
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-blue-900 opacity-75 z-0"></div>
 
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+      {/* Login Form Container */}
+      <div className="relative z-10 bg-white text-blue-900 p-8 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,1)] w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {error && (
+          <p className="text-red-600 text-sm font-bold mb-4 text-center">
+            {error}
+          </p>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5 font-semibold">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm mb-1">Email</label>
             <input
               type="email"
-              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-normal"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -54,10 +64,10 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm mb-1">Password</label>
             <input
               type="password"
-              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-normal"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -66,15 +76,15 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-blue-800 text-white font-bold py-2 rounded-lg hover:bg-blue-900 transition duration-300"
           >
             Sign In
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-center">
+        <p className="mt-6 text-sm text-center text-blue-700 font-semibold">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-600 hover:underline">
+          <a href="/register" className="text-blue-500 hover:underline">
             Register
           </a>
         </p>

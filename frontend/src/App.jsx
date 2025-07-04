@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
@@ -18,6 +18,9 @@ const Dashboard = () => (
 );
 
 const App = () => {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Router>
       <NavAccueil />
@@ -27,9 +30,9 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/activities" element={<ActivityList />} />
         <Route path="/about" element={<About />} />
-        <Route path="/add-activity" element={<AddActivity />} />
+        <Route path="/add-activity" element={<AddActivity isAuthenticated={isAuthenticated} />} />
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/register" element={<CreateAccount />} />
         <Route path="/dashboard" element={<Dashboard />} />
         {/* Add a catch-all route for undefined pages */}
