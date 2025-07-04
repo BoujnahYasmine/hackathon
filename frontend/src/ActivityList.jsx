@@ -15,7 +15,7 @@ const ActivityList = () => {
 
   const fetchActivities = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/activities");
+      const res = await fetch("https://hackathon-44is.onrender.com/api/activities");
       if (!res.ok) throw new Error("Failed to fetch activities");
       const data = await res.json();
       setActivities(data);
@@ -34,7 +34,7 @@ const ActivityList = () => {
     if (!window.confirm("Are you sure you want to delete this activity?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/activities/${id}`, {
+      const res = await fetch(`https://hackathon-44is.onrender.com/api/activities/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Delete failed");
@@ -87,7 +87,7 @@ const ActivityList = () => {
     if (formData.image) updateData.append("image", formData.image);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/activities/${editActivityId}`, {
+      const res = await fetch(`https://hackathon-44is.onrender.com/api/activities/${editActivityId}`, {
         method: "PUT",
         body: updateData,
       });
